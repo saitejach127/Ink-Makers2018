@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<title>Spell The Word</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<style type="text/css">
+		body{
+			font-family: 'Roboto', sans-serif;
+		}
+	</style>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+<body style="margin-top: 20px; background-color: #ACDBDF;">
+	<div class="container">
+	<center><h1 style="padding-top: 20px;">Search For the Word to Spell</h1></center>
+	<br><br>
+	<form method="POST" action="/word/">
+		{% csrf_token %}
+		<div class="form-group">
+			<center><input type="text" name="word" class="form-control" style="width: 50%"></center>
+		</div>
+		<center><button type="submit" class="btn btn-success">Submit</button></center><br><br>
+	</form>
+{% if error %}
+	<div class="alert alert-danger" role="alert" style="margin-top: 20px; ">
+  		Sorry Word Not Found
+	</div><br><br><br>
+{% endif %}
+
+{% if word %}
+	<center><h1 style="text-transform: uppercase;">{{ word.name }}</h1></center>
+	<div class="row">
+		<div class="col-lg-6">
+			<center>
+			<iframe src="https://www.youtube.com/embed/{{word.url}}?autoplay=1&loop=1" frameborder="0" width="400" height="300" allow="autoplay; encrypted-media" allowfullscreen loop=1></iframe></center>
+		</div>
+		<div class="col-lg-6">
+			<center><img src="{{word.image}}"></center>
+		</div>
+	</div><br><br><br>
+{% endif %}
+
+</div>
+
+</body>
+</html>

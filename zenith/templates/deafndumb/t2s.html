@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Text to speech</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<style type="text/css">
+		body{
+			font-family: 'Roboto', sans-serif;
+		}
+	</style>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+<body style="margin-top: 20px; background-color: #ACDBDF; background-size: cover;">
+	<div class="container">
+<form method="POST" action="/t2s/">
+	{% csrf_token %}
+	<div class="form-group">
+		<h1><label for="word">Enter the text to convert to speech</label></h1>
+		<center><input type="text" id="word" name="word" class="form-control" style="width: 50%"></center>
+	</div>
+	<center><button type="submit" class="btn btn-success">Submit</button></center><br><br>
+</form>
+{% if success %}
+	<center><audio controls autoplay>
+		<source src="/media/t2s/speech.mp3" type="audio/mpeg"><br><br>
+	</audio></center>
+{% endif %}
+</div>
+</body>
+</html>
